@@ -1,28 +1,67 @@
 <template>
   <div :class="sectionClass" class="container">
-    <!-- Loader -->
-    <div v-if="loading" class="card">
-      <div class="skeleton image"></div>
-      <div class="skeleton title"></div>
-      <div class="skeleton text"></div>
-      <div class="skeleton text short"></div>
-      <div class="skeleton button"></div>
-    </div>
-
-    <!-- Content -->
-    <div v-else>
-      <div v-if="isAvailable">
-        <img :src="product.image" width="200" />
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.description }}</p>
-        <h3>$ {{ product.price }}</h3>
+    <div class="card">
+      <!-- Loader -->
+      <div v-if="loading" class="content skeleton-wrapper">
+        <div class="image"></div>
+        <div class="details">
+          <div class="title"></div>
+          <div class="text"></div>
+          <div class="text short"></div>
+          <div class="price"></div>
+          <div class="button"></div>
+        </div>
       </div>
 
-      <div v-else>
-        <h2>This product is unavailable to show</h2>
-      </div>
+      <!-- Content -->
+      <div v-else class="content">
+        <template v-if="isAvailable">
+          <div class="left">
+            <img :src="product.image" class="product-image" />
+          </div>
 
-      <button @click="nextProduct">Next Product</button>
+          <div class="right">
+            <h2 class="title">{{ product.title }}</h2>
+
+            <div class="category-rating">
+              <span class="category">
+                {{ product.category }}
+              </span>
+              <span class="rating">
+                {{ product.rating?.rate }}/5
+                <span class="dots">
+                  <span
+                    v-for="n in 5"
+                    :key="n"
+                    :class="[
+                      'dot',
+                      n <= Math.round(product.rating?.rate) ? 'active' : '',
+                    ]"
+                  ></span>
+                </span>
+              </span>
+            </div>
+            <hr />
+            <p class="description">{{ product.description }}</p>
+            <hr />
+            <div class="bottom">
+              <h3 class="price">$ {{ product.price }}</h3>
+
+              <div class="buttons">
+                <button class="buy">Buy now</button>
+                <button class="next" @click="nextProduct">Next product</button>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <template v-else>
+          <div class="unavailable">
+            <h2>This product is unavailable to show</h2>
+            <button class="next" @click="nextProduct">Next product</button>
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>

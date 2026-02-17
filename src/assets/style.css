@@ -1,0 +1,36 @@
+:root {
+  --men-color: #002772;
+  --women-color: #720060;
+  --unavailable-color: #999;
+}
+
+.men-section {
+  background: var(--men-color);
+  color: white;
+}
+
+.women-section {
+  background: var(--women-color);
+  color: white;
+}
+
+.unavailable-section {
+  background: var(--unavailable-color);
+  color: white;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

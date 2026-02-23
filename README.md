@@ -1,4 +1,4 @@
-# task_5
+# ecommerce-catalog with Vue.js 2
 
 ## Project setup
 ```
